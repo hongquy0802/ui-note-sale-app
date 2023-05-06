@@ -8,12 +8,12 @@
         <input type="text" class="form-control" id="name" [(ngModel)]="param.name">
       </div>
       <div class="col-md-4">
-        <label for="inputPassword4" class="form-label">Số điện thoại</label>
-        <input type="password" class="form-control" id="inputPassword4">
+        <label for="mobile" class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" id="mobile" [(ngModel)]="param.mobile">
       </div>
       <div class="col-md-4">
         <label for="inputSource" class="form-label">Nguồn</label>
-        <select id="inputSource" class="form-select">
+        <select id="inputSource" class="form-select"  [(ngModel)]="param.source">
           <option selected [value]=""></option>
           <option *ngFor="let source of sourceList" [value]="source.key">{{source.value}}</option>
         </select>
