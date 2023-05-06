@@ -1,0 +1,87 @@
+<h1>Note <i class="fas fa-comment-alt-lines"></i></h1>
+<div class="card">
+  <div class="card-head">Ghi chú thông tin khách hàng</div>
+  <div class="card-body">
+    <form class="row g-3" [formGroup]="registerForm">
+      <div class="col-md-4">
+        <label for="name" class="form-label">Họ và tên</label>
+        <input type="text" class="form-control" id="name" formControlName="name"
+        required [ngClass]="{ 'is-invalid': f.name.touched && f.name.errors, 'is-valid': f.name.valid }">
+        <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+          <div *ngIf="f.name.errors.required">Vui lòng nhập Họ tên!</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="mobile" class="form-label">Số điện thoại</label>
+        <input type="mobile" class="form-control" id="mobile" formControlName="mobile"
+        required [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors, 'is-valid': f.mobile.valid }">
+        <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
+          <div *ngIf="f.mobile.errors.required">Vui lòng nhập Số điện thoại!</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" formControlName="email"
+        required [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors, 'is-valid': f.email.valid }">
+        <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Vui lòng nhập email!</div>
+          <div *ngIf="f.email.errors.pattern">Nhập email sai cú pháp!</div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <label for="address" class="form-label">Địa chỉ</label>
+        <input type="address" class="form-control" id="address" formControlName="address">
+      </div>
+      <div class="col-md-4">
+        <label for="source" class="form-label">Nguồn</label>
+        <select id="source" class="form-select" formControlName="source"
+        required [ngClass]="{ 'is-invalid': f.source.touched && f.source.errors, 'is-valid': f.source.valid }">
+          <option selected [value]=""></option>
+          <option *ngFor="let source of sourceList" [value]="source.key">{{source.value}}</option>
+        </select>
+        <div *ngIf="f.source.touched && f.source.errors" class="invalid-feedback">
+          <div *ngIf="f.source.errors.required">Vui lòng nhập Nguồn!</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="status" class="form-label">Trạng Thái</label>
+        <select id="status" class="form-select" formControlName="status"
+        required [ngClass]="{ 'is-invalid': f.status.touched && f.status.errors, 'is-valid': f.status.valid }">
+          <option selected [value]=""></option>
+          <option *ngFor="let status of statusList" [value]="status.key">{{status.value}}</option>
+        </select>
+        <div *ngIf="f.status.touched && f.status.errors" class="invalid-feedback">
+          <div *ngIf="f.status.errors.required">Vui lòng nhập Trạng thái!</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="favourite" class="form-label">Quan Tâm</label>
+        <select id="favourite" class="form-select" formControlName="favourite"
+        required [ngClass]="{ 'is-invalid': f.favourite.touched && f.favourite.errors, 'is-valid': f.favourite.valid }">
+          <option selected [value]=""></option>
+          <option *ngFor="let favourite of favouriteList" [value]="favourite.key">{{favourite.value}}</option>
+        </select>
+        <div *ngIf="f.favourite.touched && f.favourite.errors" class="invalid-feedback">
+          <div *ngIf="f.favourite.errors.required">Vui lòng nhập Quan tâm!</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-8">
+        <label for="note" class="form-label">Ghi chú</label>
+        <textarea class="form-control" placeholder="Leave a comment here" formControlName="note"
+         id="note"
+         required [ngClass]="{ 'is-invalid': f.note.touched && f.note.errors, 'is-valid': f.note.valid }">
+        </textarea>
+        <div *ngIf="f.note.touched && f.note.errors" class="invalid-feedback">
+          <div *ngIf="f.note.errors.required">Vui lòng nhập Ghi chú!</div>
+        </div>
+      </div>
+      <div class="col-12">
+        <button [disabled]="registerForm.invalid" (click)="registerFormSubmit()" class="btn btn-success" style="margin-right: 10px;"><i class="fas fa-save"></i> Lưu</button>
+        <button class="btn btn-danger" (click)="resetForm()"><i class="fas fa-window-close"></i> Nhập lại</button>
+      </div>
+    </form>
+  </div>
+</div>
