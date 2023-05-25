@@ -32,9 +32,8 @@ export class NewNoteComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = this.fb.group({
       name: ['', Validators.compose([Validators.required])],
-      email: ['', Validators.compose([Validators.required,
-      Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')])],
-      mobile: ['', Validators.compose([Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]+$')])],
+      email: ['', Validators.compose([Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')])],
+      mobile: ['', Validators.compose([Validators.maxLength(11), Validators.pattern('^[0-9]+$')])],
       address: ['', Validators.compose([])],
       source: ['', Validators.compose([Validators.required])],
       status: ['', Validators.compose([Validators.required])],
@@ -70,6 +69,8 @@ export class NewNoteComponent implements OnInit {
       let numberItem = this.userList.length;
       this.db.object('/customers/'+ numberItem).set({customerinfo: customerinfo}).then(() => {
         console.log('Item added successfully!');
+        alert('Item added successfully!');
+        this.resetForm();
       })
       .catch(error => {
         console.error('Error adding item:', error);

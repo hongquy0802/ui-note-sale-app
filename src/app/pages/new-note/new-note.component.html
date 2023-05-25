@@ -14,7 +14,7 @@
       <div class="col-md-4">
         <label for="mobile" class="form-label">Số điện thoại</label>
         <input type="mobile" class="form-control" id="mobile" formControlName="mobile"
-        required [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors, 'is-valid': f.mobile.valid }">
+        [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors, 'is-valid': f.mobile.valid }">
         <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
           <div *ngIf="f.mobile.errors.required">Vui lòng nhập Số điện thoại!</div>
         </div>
@@ -22,7 +22,7 @@
       <div class="col-md-4">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" formControlName="email"
-        required [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors, 'is-valid': f.email.valid }">
+         [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors, 'is-valid': f.email.valid }">
         <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
           <div *ngIf="f.email.errors.required">Vui lòng nhập email!</div>
           <div *ngIf="f.email.errors.pattern">Nhập email sai cú pháp!</div>
