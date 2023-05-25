@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { favouriteData } from 'src/app/model/favourite.model';
 import { sourceData } from 'src/app/model/source.model';
@@ -14,15 +15,18 @@ export class NewNoteComponent implements OnInit {
   sourceList = sourceData;
   statusList = statusData;
   favouriteList = favouriteData;
+  userList: any = [];
 
   registerForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private db: AngularFireDatabase
   ) { }
 
   ngOnInit(): void {
     this.createRegisterForm();
+    this.getAll();
   }
 
   createRegisterForm() {
@@ -39,13 +43,22 @@ export class NewNoteComponent implements OnInit {
     });
   }
 
+  getAll() {
+    this.db.object('/customers').valueChanges().subscribe(data => {
+      console.log(data);
+      if (data) {
+        this.userList = data;
+      }
+    });
+  }
+
   get f() { return this.registerForm.controls; }
 
   registerFormSubmit() {
-    const data = {
-      name: this.registerForm.controls.name.value ? this.registerForm.controls.name.value : null,
+    const customerinfo = {
+      fullName: this.registerForm.controls.name.value ? this.registerForm.controls.name.value : null,
       email: this.registerForm.controls.email.value ? this.registerForm.controls.email.value : null,
-      mobile: this.registerForm.controls.mobile.value ? this.registerForm.controls.mobile.value : null,
+      phone: this.registerForm.controls.mobile.value ? this.registerForm.controls.mobile.value : null,
       address: this.registerForm.controls.address.value ? this.registerForm.controls.address.value : null,
       source: this.registerForm.controls.source.value ? this.registerForm.controls.source.value : null,
       status: this.registerForm.controls.status.value ? this.registerForm.controls.status.value : null,
@@ -54,12 +67,12 @@ export class NewNoteComponent implements OnInit {
     };
 
     if (!this.registerForm.invalid) {
-      this.noteService.createNote(data).subscribe(res => {
-        if (res) {
-          console.log(res);
-        }
-      }, err => {
-        console.log(err);
+      let numberItem = this.userList.length;
+      this.db.object('/customers/'+ numberItem).set({customerinfo: customerinfo}).then(() => {
+        console.log('Item added successfully!');
+      })
+      .catch(error => {
+        console.error('Error adding item:', error);
       })
     }
   }

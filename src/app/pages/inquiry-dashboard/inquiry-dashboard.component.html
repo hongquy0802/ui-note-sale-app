@@ -2,7 +2,7 @@
 <div class="card">
   <div class="card-head">Tìm kiếm thông tin khách hàng</div>
   <div class="card-body">
-    <form class="row g-3">
+    <div class="row g-3">
       <div class="col-md-4">
         <label for="name" class="form-label">Họ và tên</label>
         <input type="text" class="form-control" id="name" [(ngModel)]="param.name">
@@ -20,16 +20,16 @@
       </div>
       <div class="col-md-4">
         <label for="inputSource" class="form-label">Trạng Thái</label>
-        <select id="inputSource" class="form-select">
+        <select id="inputSource" class="form-select" [(ngModel)]="param.status">
           <option selected [value]=""></option>
           <option *ngFor="let status of statusList" [value]="status.key">{{status.value}}</option>
         </select>
       </div>
       <div class="col-12">
-        <button class="btn btn-danger" style="margin-right: 10px;"><i class="fas fa-window-close"></i> Nhập lại</button>
-        <button class="btn btn-warning"><i class="far fa-search"></i> Tìm</button>
+        <button (click)="resetForm()" class="btn btn-danger" style="margin-right: 10px;"><i class="fas fa-window-close"></i> Nhập lại</button>
+        <button (click)="search()" class="btn btn-warning"><i class="far fa-search"></i> Tìm</button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
 <div class="card">
@@ -43,27 +43,13 @@
         <th scope="col">Hoạt động</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let user of userList; index as i;">
       <tr>
-        <th scope="row">1</th>
-        <td>Nguyễn Hoàng</td>
-        <td>0123123123</td>
-        <td>Hoàn tất</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Nguyễn Hoàng</td>
-        <td>0123123123</td>
-        <td>Hoàn tất</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>Nguyễn Hoàng</td>
-        <td>0123123123</td>
-        <td>Hoàn tất</td>
-        <td></td>
+        <th scope="row">{{i}}</th>
+        <td>{{user.customerinfo.fullName}}</td>
+        <td>{{user.customerinfo.phone}}</td>
+        <td>{{user.customerinfo.status | statusPipe}}</td>
+        <td><a (click)="removeUser(user)"  data-toggle="tooltip" title="Remove user"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
     </tbody>
   </table>

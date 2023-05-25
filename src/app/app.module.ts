@@ -12,6 +12,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BodyComponent } from './pages/body/body.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { AngularFireModule} from '@angular/fire/compat'
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { StatusPipe } from './pipe/status.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     SidenavComponent,
     DashboardComponent,
     BodyComponent,
+    StatusPipe
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase), // Initialize Firebase
+    AngularFirestoreModule // Include the Firestore module
+
   ],
   providers: [],
   bootstrap: [AppComponent]
