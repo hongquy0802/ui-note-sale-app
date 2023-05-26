@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { favouriteData } from 'src/app/model/favourite.model';
 import { sourceData } from 'src/app/model/source.model';
 import { statusData } from 'src/app/model/status.model';
-import { NoteService } from 'src/app/services/note.service';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-new-note',
@@ -20,7 +20,6 @@ export class NewNoteComponent implements OnInit {
   registerForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private noteService: NoteService,
     private db: AngularFireDatabase
   ) { }
 
@@ -31,14 +30,14 @@ export class NewNoteComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = this.fb.group({
-      name: ['', Validators.compose([Validators.required])],
+      name: [''],
       email: ['', Validators.compose([Validators.pattern('^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')])],
       mobile: ['', Validators.compose([Validators.maxLength(11), Validators.pattern('^[0-9]+$')])],
-      address: ['', Validators.compose([])],
-      source: ['', Validators.compose([Validators.required])],
-      status: ['', Validators.compose([Validators.required])],
-      favourite: ['', Validators.compose([Validators.required])],
-      note: ['', Validators.compose([Validators.required])],
+      address: [''],
+      source: [''],
+      status: [''],
+      favourite: [''],
+      note: [''],
     });
   }
 
@@ -65,6 +64,11 @@ export class NewNoteComponent implements OnInit {
       note: this.registerForm.controls.note.value ? this.registerForm.controls.note.value : null,
     };
 
+    if (this.registerForm.invalid) {
+      UIService.fireValidateForm(this.registerForm);
+      return;
+    }
+
     if (!this.registerForm.invalid) {
       let numberItem = this.userList.length;
       this.db.object('/customers/'+ numberItem).set({customerinfo: customerinfo}).then(() => {
@@ -87,5 +91,21 @@ export class NewNoteComponent implements OnInit {
     this.registerForm.controls.status.setValue('');
     this.registerForm.controls.favourite.setValue('');
     this.registerForm.controls.note.setValue('');
+    this.registerForm.controls.name.setErrors(null);
+    this.registerForm.controls.name.reset();
+    this.registerForm.controls.email.setErrors(null);
+    this.registerForm.controls.email.reset();
+    this.registerForm.controls.mobile.setErrors(null);
+    this.registerForm.controls.mobile.reset();
+    this.registerForm.controls.address.setErrors(null);
+    this.registerForm.controls.address.reset();
+    this.registerForm.controls.source.setErrors(null);
+    this.registerForm.controls.source.reset();
+    this.registerForm.controls.status.setErrors(null);
+    this.registerForm.controls.status.reset();
+    this.registerForm.controls.favourite.setErrors(null);
+    this.registerForm.controls.favourite.reset();
+    this.registerForm.controls.note.setErrors(null);
+    this.registerForm.controls.note.reset();
   }
 }

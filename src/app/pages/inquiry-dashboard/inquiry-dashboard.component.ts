@@ -72,4 +72,11 @@ export class InquiryDashboardComponent implements OnInit {
     console.log(user);
     
   }
+
+  openInfoCustomer(info: any, id: any) {
+    console.log(info);
+    console.log('id ' + id);
+    
+    this.customerService.sendData(info, id);
+  }
 }

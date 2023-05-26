@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/api/note-sale/'
 
@@ -8,11 +7,10 @@ const baseUrl = 'http://localhost:8080/api/note-sale/'
   providedIn: 'root'
 })
 export class CustomerService {
+  dataTranfer: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  constructor() { }
 
-  constructor(private http: HttpClient) { }
-
-  getCustomer(body?: any): Observable<any> {
-    let url = baseUrl + 'search';
-    return this.http.get(url, body);
+  sendData(info: any, id: any) {
+    this.dataTranfer.next({info, id});
   }
 }

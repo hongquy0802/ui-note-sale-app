@@ -16,6 +16,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule} from '@angular/fire/compat'
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { StatusPipe } from './pipe/status.pipe';
+import { UIService } from './services/ui.service';
+import { CustomerDetailComponent } from './pages/customer-detail/customer-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { StatusPipe } from './pipe/status.pipe';
     SidenavComponent,
     DashboardComponent,
     BodyComponent,
-    StatusPipe
+    StatusPipe,
+    CustomerDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,9 @@ import { StatusPipe } from './pipe/status.pipe';
     AngularFirestoreModule // Include the Firestore module
 
   ],
-  providers: [],
+  providers: [
+    UIService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

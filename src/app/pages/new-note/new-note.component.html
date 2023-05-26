@@ -13,20 +13,11 @@
       </div>
       <div class="col-md-4">
         <label for="mobile" class="form-label">Số điện thoại</label>
-        <input type="mobile" class="form-control" id="mobile" formControlName="mobile"
-        [ngClass]="{ 'is-invalid': f.mobile.touched && f.mobile.errors, 'is-valid': f.mobile.valid }">
-        <div *ngIf="f.mobile.touched && f.mobile.errors" class="invalid-feedback">
-          <div *ngIf="f.mobile.errors.required">Vui lòng nhập Số điện thoại!</div>
-        </div>
+        <input type="mobile" class="form-control" id="mobile" formControlName="mobile">
       </div>
       <div class="col-md-4">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email"
-         [ngClass]="{ 'is-invalid': f.email.touched && f.email.errors, 'is-valid': f.email.valid }">
-        <div *ngIf="f.email.touched && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.email.errors.required">Vui lòng nhập email!</div>
-          <div *ngIf="f.email.errors.pattern">Nhập email sai cú pháp!</div>
-        </div>
+        <input type="email" class="form-control" id="email" formControlName="email">
       </div>
       <div class="col-md-8">
         <label for="address" class="form-label">Địa chỉ</label>
@@ -79,7 +70,7 @@
         </div>
       </div>
       <div class="col-12">
-        <button [disabled]="registerForm.invalid" (click)="registerFormSubmit()" class="btn btn-success" style="margin-right: 10px;"><i class="fas fa-save"></i> Lưu</button>
+        <button (click)="registerFormSubmit()" class="btn btn-success" style="margin-right: 10px;"><i class="fas fa-save"></i> Lưu</button>
         <button class="btn btn-danger" (click)="resetForm()"><i class="fas fa-window-close"></i> Nhập lại</button>
       </div>
     </form>

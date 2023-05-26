@@ -1,0 +1,63 @@
+<h1>Chi tiết khách hàng <i class="far fa-user"></i></h1>
+<div class="card">
+    <div class="card-head">Xem và chỉnh sửa thông tin khách hàng &nbsp;&nbsp;&nbsp; 
+        <span><button [disabled]="isEdited"  style="display: contents;"><i class="far fa-edit" (click)="onSelectEdit()"></i></button></span></div>
+    <div class="card-body">
+        <form class="row g-3" [formGroup]="editForm">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label for="name" class="form-label">Họ và tên</label>
+                    <input [readonly]="!isEdited" type="text" class="form-control" id="name" formControlName="name">
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <label for="mobile" class="form-label">Số điện thoại</label>
+                    <input [readonly]="!isEdited" type="mobile" class="form-control" id="mobile" formControlName="mobile">
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <label for="source" class="form-label">Nguồn</label>
+                    <select id="source" class="form-select" formControlName="source">
+                      <option [disabled]="!isEdited" *ngFor="let source of sourceList" [value]="source.key">{{source.value}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <label for="favourite" class="form-label">Quan Tâm</label>
+                    <select id="favourite" class="form-select" formControlName="favourite">
+                      <option [disabled]="!isEdited" *ngFor="let favourite of favouriteList" [value]="favourite.key">{{favourite.value}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <label for="status" class="form-label">Trạng Thái</label>
+                    <select id="status" class="form-select" formControlName="status">
+                      <option [disabled]="!isEdited" *ngFor="let status of statusList" [value]="status.key">{{status.value}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                    <input [readonly]="!isEdited" type="address" class="form-control" id="address" formControlName="address">
+                  </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <label for="note" class="form-label">Ghi chú</label>
+                    <textarea class="form-control" placeholder="Leave a comment here" formControlName="note"
+                     id="note" [readonly]="!isEdited">
+                    </textarea>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="col-12" *ngIf="isEdited">
+                <button (click)="editFormSubmit()" class="btn btn-success" style="margin-right: 10px;"><i class="fas fa-save"></i> Lưu Thay Đổi</button>
+                <button (click)="cancelEdit()" class="btn btn-danger" style="margin-right: 10px;"><i class="fas fa-window-close"></i> Hủy Thay Đổi</button>
+            </div>
+        </form>
+    </div>
+</div>

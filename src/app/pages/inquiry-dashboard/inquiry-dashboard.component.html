@@ -46,7 +46,7 @@
     <tbody *ngFor="let user of userList; index as i;">
       <tr>
         <th scope="row">{{i}}</th>
-        <td>{{user.customerinfo.fullName}}</td>
+        <td><a routerLink="/customer/{{user.customerinfo.fullName}}" style="color: blue; text-decoration: underline; cursor: pointer;" (click)="openInfoCustomer(user.customerinfo, i)">{{user.customerinfo.fullName}}</a></td>
         <td>{{user.customerinfo.phone}}</td>
         <td>{{user.customerinfo.status | statusPipe}}</td>
         <td><a (click)="removeUser(user)"  data-toggle="tooltip" title="Remove user"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
